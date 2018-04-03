@@ -24,7 +24,8 @@ def create_new():
 
 def retrieve_contact():
     get_contact = input(
-    'Enter username of contact that you would like to view: ')
+                        'Enter username of contact that you would like to view: '
+                        )
     if get_contact in phonebook:
         print(phonebook[get_contact])
     else:

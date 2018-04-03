@@ -29,5 +29,5 @@ for i in word_list:
 
 sorted_list = sorted(
                     list(word_dict.items()),
-                    key=operator.itemgetter(1), reverse=True)
-print(sorted_list[:10])
+                    key=operator.itemgetter(1), reverse=False)
+print(sorted_list[-10:])
