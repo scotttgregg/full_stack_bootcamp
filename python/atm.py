@@ -21,23 +21,27 @@ class Atm:
         self.account_num = None
         self.accounts = accounts or {}
 
-
     def check_balance(self):
-            return self.account_num.bal
+        return self.account_num.bal
 
     def deposit(self, amount):
         self.account_num.bal += amount
         return self.account_num.bal
 
     def check_withdrawal(self, amount):
-        while True:
-            if self.withdrawal(amount) > self.account_num.bal:
-                print("The amount withdrawn can not exceed balance on account.")
+        if amount <= self.account_num.bal:
+            return True
+        else:
+            return False
 
+    # print("The amount withdrawn can not exceed balance on account.")
 
     def withdrawal(self, amount):
-        self.account_num.bal -= amount
-        return self.account_num.bal
+        if self.check_withdrawal(amount) is True:
+            self.account_num.bal -= amount
+            print(f"Your new balance is {self.account_num.bal}")
+        else:
+            print("Insufficient Funds")
 
     def calc_interest(self):
         return self.account_num.bal * self.account_num.int_rt + self.account_num.bal
@@ -51,14 +55,12 @@ class Atm:
                     print(self.deposit(money))
                 elif prompt == 'withdraw':
                     money = int(input("How much would you like to withdraw?: "))
-                    self.check_withdrawal(money)
-                    print(self.withdrawal(money))
+                    self.withdrawal(money)
+
                 elif prompt == 'check balance':
                     print(atm.check_balance())
                 elif prompt == 'calc interest':
                     print(atm.calc_interest())
-
-
 
     def user_authentication(self):
         account_number = input('What is your account number?: ')
@@ -79,7 +81,3 @@ atm = Atm(dictionary_atm)
 while True:
     user = atm.user_authentication()
     atm.atm_menu(user)
-
-
-
-
